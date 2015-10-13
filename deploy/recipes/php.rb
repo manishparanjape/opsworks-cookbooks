@@ -23,12 +23,12 @@ node[:deploy].each do |application, deploy|
     deploy_data deploy
     app application
   end
-  
+  #Fix permisisons Later ....
   #config/app/etc Directory
   directory "#{deploy[:deploy_to]}/current/app/etc" do
       group params[:group]
       owner params[:user]
-      mode 0770
+      mode 0777
       action :create
       recursive true
   end
@@ -37,7 +37,16 @@ node[:deploy].each do |application, deploy|
   directory "#{deploy[:deploy_to]}/current/var" do
       group params[:group]
       owner params[:user]
-      mode 0775
+      mode 0777
+      action :create
+      recursive true
+  end
+  
+  #media Directory
+  directory "#{deploy[:deploy_to]}/shared/media" do
+      group params[:group]
+      owner params[:user]
+      mode 0777
       action :create
       recursive true
   end
