@@ -42,7 +42,7 @@ define :opsworks_deploy_dir do
   end
   
   #config/app/etc Directory
-  directory "#{params[:path]}/shared/config/app/etc" do
+  directory "#{params[:path]}/current/config/app/etc" do
       group params[:group]
       owner params[:user]
       mode 0770
@@ -60,7 +60,7 @@ define :opsworks_deploy_dir do
   end
   
   #var Directory
-  directory "#{params[:path]}/shared/var" do
+  directory "#{params[:path]}/current/var" do
       group params[:group]
       owner params[:user]
       mode 0775
