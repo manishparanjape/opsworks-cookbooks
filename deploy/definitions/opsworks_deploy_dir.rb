@@ -49,6 +49,15 @@ define :opsworks_deploy_dir do
       action :create
       recursive true
   end
+  
+  #log Directory
+  directory "#{params[:path]}/shared/var/log" do
+      group params[:group]
+      owner params[:user]
+      mode 0775
+      action :create
+      recursive true
+  end
 
  # Protect var directory with .htaccess
  execute '' do
