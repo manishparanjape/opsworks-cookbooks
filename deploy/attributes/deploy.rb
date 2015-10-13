@@ -98,7 +98,7 @@ node[:deploy].each do |application, deploy|
   default[:deploy][application][:purge_before_symlink] = []
   default[:deploy][application][:create_dirs_before_symlink] = []
   default[:deploy][application][:symlink_before_migrate] = []
-  default[:deploy][application][:symlinks] = {"var" => "var", "media" => "media"}
+  default[:deploy][application][:symlinks] = {"/var" => "/var", "media" => "media"}
 
   default[:deploy][application][:environment] = {"RAILS_ENV" => deploy[:rails_env],
                                                  "RUBYOPT" => "",
