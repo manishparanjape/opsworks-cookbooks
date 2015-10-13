@@ -22,14 +22,6 @@ define :opsworks_deploy_dir do
     end
   end
 
- # Protect var directory with .htaccess
- execute '' do
-    command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
- end
- execute '' do
-    command "echo 'Deny from all' >> #{params[:path]}/shared/var/.htaccess"
- end
- 
   bash "Enable selinux httpd_var_run_t target for unicorn socket" do
     dir_path_socket = "#{params[:path]}/shared/sockets"
     context = "httpd_var_run_t"
