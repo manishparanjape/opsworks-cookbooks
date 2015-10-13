@@ -25,7 +25,7 @@ node[:deploy].each do |application, deploy|
   end
   
   #config/app/etc Directory
-  directory "#{deploy[:deploy_to]}/current/config/app/etc" do
+  directory "#{deploy[:deploy_to]}/current/app/etc" do
       group params[:group]
       owner params[:user]
       mode 0770
