@@ -95,9 +95,9 @@ node[:deploy].each do |application, deploy|
   default[:deploy][application][:enable_submodules] = true
   default[:deploy][application][:shallow_clone] = false
   default[:deploy][application][:delete_cached_copy] = true
-  default[:deploy][application][:purge_before_symlink] = {}
-  default[:deploy][application][:create_dirs_before_symlink] = {}
-  default[:deploy][application][:symlink_before_migrate] = {}
+  default[:deploy][application][:purge_before_symlink] = []
+  default[:deploy][application][:create_dirs_before_symlink] = []
+  default[:deploy][application][:symlink_before_migrate] = []
   default[:deploy][application][:symlinks] = {"var" => "var", "media" => "media"}
 
   default[:deploy][application][:environment] = {"RAILS_ENV" => deploy[:rails_env],
