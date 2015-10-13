@@ -1,7 +1,9 @@
 define :opsworks_deploy do
   application = params[:app]
   deploy = params[:deploy_data]
-
+  
+  Chef::Log.debug("DEPLOY DIRECTORY IS  #{deploy[:deploy_to]}") 
+  
   directory "#{deploy[:deploy_to]}" do
     group deploy[:group]
     owner deploy[:user]
