@@ -23,5 +23,24 @@ node[:deploy].each do |application, deploy|
     deploy_data deploy
     app application
   end
+  
+       #config/app/etc Directory
+      directory "#{params[:path]}/#{release_path}/config/app/etc" do
+          group params[:group]
+          owner params[:user]
+          mode 0770
+          action :create
+          recursive true
+      end
+      
+      #var Directory
+      directory "#{params[:path]}/#{release_path}/var" do
+          group params[:group]
+          owner params[:user]
+          mode 0775
+          action :create
+          recursive true
+      end
+      
 end
 
