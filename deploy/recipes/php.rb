@@ -18,6 +18,11 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     path deploy[:deploy_to]
   end
+  
+  #Mount NFS Server
+  execute '' do
+    command "mount 172.31.31.12:/public /srv/www/magento/shared"
+  end
 
   opsworks_deploy do
     deploy_data deploy
