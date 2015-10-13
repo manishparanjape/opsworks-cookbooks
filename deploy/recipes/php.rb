@@ -41,15 +41,5 @@ node[:deploy].each do |application, deploy|
       action :create
       recursive true
   end
-  
-  #media Directory
-  directory "#{deploy[:deploy_to]}/shared/media" do
-      group params[:group]
-      owner params[:user]
-      mode 0777
-      action :create
-      recursive true
-  end
-      
 end
 
