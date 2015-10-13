@@ -28,6 +28,7 @@ node[:deploy].each do |application, deploy|
     deploy_data deploy
     app application
   end
+  
   #Fix permisisons Later ....
   #config/app/etc Directory
   directory "#{deploy[:deploy_to]}/current/app/etc" do
@@ -46,5 +47,14 @@ node[:deploy].each do |application, deploy|
       action :create
       recursive true
   end
+  
+  # Protect var directory with .htaccess
+ execute '' do
+    command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
+ end
+ execute '' do
+    command "echo 'Deny from all' >> #{params[:path]}/shared/var/.htaccess"
+ end
+ 
 end
 
