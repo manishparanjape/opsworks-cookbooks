@@ -18,3 +18,42 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     path deploy[:deploy_to]
   end
+  
+  opsworks_deploy do
+    deploy_data deploy
+    app application
+  end
+  
+  #Mount NFS Server
+  execute 'Mount NFS Server' do
+    command "mount 172.31.31.12:/public /srv/www/magento/shared"
+  end
+  
+  #Fix permisisons Later ....
+  #config/app/etc Directory
+  directory "#{deploy[:deploy_to]}/current/app/etc" do
+      group params[:group]
+      owner params[:user]
+      mode 0777
+      action :create
+      recursive true
+  end
+  
+  #var Directory
+  directory "#{deploy[:deploy_to]}/current/var" do
+      group params[:group]
+      owner params[:user]
+      mode 0777
+      action :create
+      recursive true
+  end
+  
+  # Protect var directory with .htaccess
+ execute '' do
+    command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
+ end
+ execute '' do
+    command "echo 'Deny from all' >> #{params[:path]}/shared/var/.htaccess"
+ end
+ 
+end
