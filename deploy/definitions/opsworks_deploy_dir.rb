@@ -41,26 +41,8 @@ define :opsworks_deploy_dir do
       recursive true
   end
   
-  #config/app/etc Directory
-  directory "#{params[:path]}/current/config/app/etc" do
-      group params[:group]
-      owner params[:user]
-      mode 0770
-      action :create
-      recursive true
-  end
-  
   #media Directory
   directory "#{params[:path]}/shared/media" do
-      group params[:group]
-      owner params[:user]
-      mode 0775
-      action :create
-      recursive true
-  end
-  
-  #var Directory
-  directory "#{params[:path]}/current/var" do
       group params[:group]
       owner params[:user]
       mode 0775
