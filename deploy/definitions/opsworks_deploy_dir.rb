@@ -22,43 +22,6 @@ define :opsworks_deploy_dir do
     end
   end
 
-
-  directory "#{params[:path]}/shared" do
-    group params[:group]
-    owner params[:user]
-    mode 0770
-    action :create
-    recursive true
-  end
-
-  # create shared/ directory structure
-  #Config Directory
-  directory "#{params[:path]}/shared/config" do
-      group params[:group]
-      owner params[:user]
-      mode 0775
-      action :create
-      recursive true
-  end
-  
-  #media Directory
-  directory "#{params[:path]}/shared/media" do
-      group params[:group]
-      owner params[:user]
-      mode 0775
-      action :create
-      recursive true
-  end
-  
-  #log Directory
-  directory "#{params[:path]}/shared/var/log" do
-      group params[:group]
-      owner params[:user]
-      mode 0775
-      action :create
-      recursive true
-  end
-
  # Protect var directory with .htaccess
  execute '' do
     command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
