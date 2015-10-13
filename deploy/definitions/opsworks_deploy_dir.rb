@@ -32,16 +32,50 @@ define :opsworks_deploy_dir do
   end
 
   # create shared/ directory structure
-  ['media','var'].each do |dir_name|
-    directory "#{params[:path]}/shared/#{dir_name}" do
+  #Config Directory
+  directory "#{params[:path]}/shared/config" do
+      group params[:group]
+      owner params[:user]
+      mode 0775
+      action :create
+      recursive true
+  end
+  
+  #config/app/etc Directory
+  directory "#{params[:path]}/shared/config/app/etc" do
       group params[:group]
       owner params[:user]
       mode 0770
       action :create
       recursive true
-    end
+  end
+  
+  #media Directory
+  directory "#{params[:path]}/shared/media" do
+      group params[:group]
+      owner params[:user]
+      mode 0775
+      action :create
+      recursive true
+  end
+  
+  #var Directory
+  directory "#{params[:path]}/shared/var" do
+      group params[:group]
+      owner params[:user]
+      mode 0775
+      action :create
+      recursive true
   end
 
+ # Protect var directory with .htaccess
+ execute '' do
+    command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
+ end
+ execute '' do
+    command "echo 'Deny from all' >> #{params[:path]}/shared/var/.htaccess"
+ end
+ 
   bash "Enable selinux httpd_var_run_t target for unicorn socket" do
     dir_path_socket = "#{params[:path]}/shared/sockets"
     context = "httpd_var_run_t"
