@@ -80,24 +80,6 @@ define :opsworks_deploy do
       symlinks(deploy[:symlinks]) unless deploy[:symlinks].nil?
       action deploy[:action]
 
-      #config/app/etc Directory
-      directory "#{params[:path]}/#{release_path}/config/app/etc" do
-          group params[:group]
-          owner params[:user]
-          mode 0770
-          action :create
-          recursive true
-      end
-      
-      #var Directory
-      directory "#{params[:path]}/#{release_path}/var" do
-          group params[:group]
-          owner params[:user]
-          mode 0775
-          action :create
-          recursive true
-      end
-      
       if deploy[:application_type] == 'rails' && node[:opsworks][:instance][:layers].include?('rails-app')
         restart_command "sleep #{deploy[:sleep_before_restart]} && #{node[:opsworks][:rails_stack][:restart_command]}"
       end
