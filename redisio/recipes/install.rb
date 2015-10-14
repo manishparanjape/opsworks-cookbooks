@@ -24,7 +24,7 @@ location = "#{redis['mirror']}/#{redis['base_name']}#{redis['version']}.#{redis[
 
 redis_instances = redis['servers']
 if redis_instances.nil?
-  redis_instances = [{'port' => '6379'}]
+  redis_instances = [{'port' => '6377'},{'port' => '6378'},{'port' => '6379'}]
 end
 
 redisio_install "redis-servers" do
