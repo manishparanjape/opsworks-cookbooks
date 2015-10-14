@@ -49,8 +49,8 @@ node[:deploy].each do |application, deploy|
   end
   
  # Protect var directory with .htaccess
- file "#{params[:path]}/shared/var/.htaccess" do
-    content 'echo 'Order deny,allow\nDeny from all'
+ file "#{deploy[:deploy_to]}/current/var/.htaccess" do
+    content "echo 'Order deny,allow\nDeny from all'"
     group params[:group]
     owner params[:user]
     mode 0750
