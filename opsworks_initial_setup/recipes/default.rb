@@ -21,3 +21,8 @@ include_recipe 'opsworks_initial_setup::package_ntpd'
 include_recipe 'opsworks_initial_setup::package_vim'
 include_recipe 'opsworks_initial_setup::package_sqlite'
 include_recipe 'opsworks_initial_setup::package_screen'
+
+#Magento Related Modules
+packages = [
+  'php-soap'
+]

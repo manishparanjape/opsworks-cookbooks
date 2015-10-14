@@ -1,7 +1,9 @@
 define :opsworks_deploy do
   application = params[:app]
   deploy = params[:deploy_data]
-
+  
+  Chef::Log.debug("DEPLOY DIRECTORY IS  #{deploy[:deploy_to]}") 
+  
   directory "#{deploy[:deploy_to]}" do
     group deploy[:group]
     owner deploy[:user]
@@ -73,8 +75,8 @@ define :opsworks_deploy do
       migration_command deploy[:migrate_command]
       environment deploy[:environment].to_hash
       purge_before_symlink(deploy[:purge_before_symlink]) unless deploy[:purge_before_symlink].nil?
-      create_dirs_before_symlink(deploy[:create_dirs_before_symlink])
-      symlink_before_migrate(deploy[:symlink_before_migrate])
+      create_dirs_before_symlink(deploy[:create_dirs_before_symlink]) unless deploy[:create_dirs_before_symlink].nil?
+      symlink_before_migrate(deploy[:symlink_before_migrate]) unless deploy[:symlink_before_migrate].nil?
       symlinks(deploy[:symlinks]) unless deploy[:symlinks].nil?
       action deploy[:action]
 
