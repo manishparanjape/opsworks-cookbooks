@@ -48,12 +48,13 @@ node[:deploy].each do |application, deploy|
       recursive true
   end
   
-  # Protect var directory with .htaccess
- execute '' do
-    command "echo 'Order deny,allow' > #{params[:path]}/shared/var/.htaccess"
- end
- execute '' do
-    command "echo 'Deny from all' >> #{params[:path]}/shared/var/.htaccess"
- end
+ # Protect var directory with .htaccess
+ file "#{params[:path]}/shared/var/.htaccess" do
+    content 'echo 'Order deny,allow\nDeny from all'
+    group params[:group]
+    owner params[:user]
+    mode 0750
+    action :create_if_missing
+ end   
  
 end
