@@ -6,7 +6,7 @@ node[:deploy].each do |application, deploy|
   
   #Mount NFS Server
   execute 'Mount NFS Server' do
-    command "mount 172.31.31.12:/public /srv/www/magento/shared"
+    command "mount 172.31.31.12:/nfsmount/rug/ /srv/www/magento/shared"
   end
   
   #Fix permisisons Later ....
