@@ -9,6 +9,11 @@ node[:deploy].each do |application, deploy|
     command "mount 172.31.31.12:/nfsmount/rug/ /srv/www/magento/shared"
   end
   
+  #Copy local.xml from shared
+  execute 'Copy local.xml' do
+    command "cp /srv/www/magento/shared/config/local.xml /srv/www/magento/current/app/etc/local.xml"
+  end
+  
   #Fix permisisons Later ....
   #config/app/etc Directory
   directory "#{deploy[:deploy_to]}/current/app/etc" do
