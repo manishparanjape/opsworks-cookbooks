@@ -28,7 +28,6 @@ template node['varnish']['default'] do
   owner 'root'
   group 'root'
   mode 0644
-  notifies 'restart', 'service[varnish]', :delayed
 end
 
 template "#{node['varnish']['dir']}/#{node['varnish']['vcl_conf']}" do
@@ -37,13 +36,13 @@ template "#{node['varnish']['dir']}/#{node['varnish']['vcl_conf']}" do
   owner 'root'
   group 'root'
   mode 0644
-  notifies :reload, 'service[varnish]', :delayed
-  only_if { node['varnish']['vcl_generated'] == true }
 end
 
 service 'varnish' do
   supports restart: true, reload: true
-  action %w(enable)
+  action [:enable, :restart]
+  retries 2
+  retry_delay 10
 end
 
 #service 'varnishlog' do
