@@ -46,7 +46,7 @@ service 'varnish' do
   action %w(enable)
 end
 
-service 'varnishlog' do
-  supports restart: true, reload: true
-  action node['varnish']['log_daemon'] ? %w(enable start) : %w(disable stop)
-end
+#service 'varnishlog' do
+#  supports restart: true, reload: true
+#  action node['varnish']['log_daemon'] ? %w(enable start) : %w(disable stop)
+#end
