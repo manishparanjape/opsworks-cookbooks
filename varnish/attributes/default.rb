@@ -5,7 +5,7 @@ else
 end
 
 default['varnish']['version'] = '4.0'
-
+default['platform_version'] = '7'
 default['varnish']['dir'] = '/etc/varnish'
 default['varnish']['start'] = 'yes'
 default['varnish']['nfiles'] = 131_072
