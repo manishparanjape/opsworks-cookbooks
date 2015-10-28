@@ -4,7 +4,7 @@ when "debian","ubuntu"
   set['varnish']['default'] = "/etc/default/varnish"
 end
 
-default['varnish']['version'] = "2.1"
+default['varnish']['version'] = "4.1"
 
 default['varnish']['start'] = 'yes'
 default['varnish']['nfiles'] = 131072
