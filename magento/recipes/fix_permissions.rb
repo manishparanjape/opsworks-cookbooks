@@ -6,6 +6,7 @@ node[:deploy].each do |application, deploy|
   
   #Mount NFS Server
   execute 'Mount NFS Server' do
+    Chef::Log.debug("NFS Server IP is #{node[:nfs][:server_ip]}")
     command "mount 172.31.31.12:/nfsmount/rug/ /srv/www/magento/shared"
   end
   
